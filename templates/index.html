@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dubai Iftar Finder — مواعيد الإفطار</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a4731;
+    --green-mid: #2d6a4f;
+    --green-light: #52b788;
+    --gold: #d4a017;
+    --gold-light: #f0c040;
+    --cream: #fdf6ec;
+    --white: #ffffff;
+    --text: #1c1c1c;
+    --muted: #6b7280;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans', sans-serif; background:var(--cream); color:var(--text); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--green) 0%, var(--green-mid) 60%, #1a3a2a 100%);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M30 0L37 21H60L42 34L49 55L30 42L11 55L18 34L0 21H23L30 0Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+
+  nav {
+    padding: 1.5rem 2rem;
+    display: flex; justify-content:space-between; align-items:center;
+    position: relative; z-index:10;
+  }
+  .logo { font-family:'Amiri', serif; color:var(--gold-light); font-size:1.4rem; font-weight:700; text-decoration:none; }
+  .nav-links a { color:rgba(255,255,255,0.75); text-decoration:none; margin-left:1.5rem; font-size:0.9rem; transition:color .2s; }
+  .nav-links a:hover { color:var(--gold-light); }
+
+  .hero-content {
+    flex:1; display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
+    text-align:center; padding: 3rem 1.5rem;
+    position:relative; z-index:10;
+  }
+
+  .mosque-icon {
+    font-size: 4rem; margin-bottom:1rem;
+    filter: drop-shadow(0 0 20px rgba(212,160,23,0.4));
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  .hero-title {
+    font-family:'Amiri', serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    color: var(--white);
+    line-height:1.1;
+    margin-bottom:0.5rem;
+  }
+  .hero-title span { color: var(--gold-light); }
+  .hero-arabic {
+    font-family:'Amiri', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(255,255,255,0.6);
+    margin-bottom:1rem;
+    direction:rtl;
+  }
+  .hero-sub {
+    font-size:1.1rem;
+    color: rgba(255,255,255,0.75);
+    max-width:500px;
+    margin-bottom:2.5rem;
+    line-height:1.6;
+  }
+  .badge {
+    display:inline-block;
+    background:rgba(212,160,23,0.2);
+    border:1px solid rgba(212,160,23,0.4);
+    color:var(--gold-light);
+    padding:0.3rem 1rem;
+    border-radius:999px;
+    font-size:0.85rem;
+    margin-bottom:1.5rem;
+  }
+
+  /* SEARCH BOX */
+  .search-box {
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:16px;
+    padding:1.5rem;
+    width:100%; max-width:600px;
+    margin-bottom:2rem;
+  }
+  .search-row { display:flex; gap:0.75rem; flex-wrap:wrap; }
+  .search-input {
+    flex:1; min-width:200px;
+    padding:0.85rem 1.2rem;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.15);
+    color:white;
+    font-size:1rem;
+    outline:none;
+    transition:border .2s, background .2s;
+  }
+  .search-input::placeholder { color:rgba(255,255,255,0.5); }
+  .search-input:focus { border-color:var(--gold-light); background:rgba(255,255,255,0.22); }
+  .search-select {
+    padding:0.85rem 1rem;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.15);
+    color:white;
+    font-size:0.95rem;
+    outline:none;
+    cursor:pointer;
+  }
+  .search-select option { background:var(--green); color:white; }
+  .btn-search {
+    padding:0.85rem 2rem;
+    background:var(--gold);
+    color:var(--green);
+    border:none;
+    border-radius:10px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:transform .15s, box-shadow .2s;
+    white-space:nowrap;
+  }
+  .btn-search:hover { transform:translateY(-1px); box-shadow:0 4px 15px rgba(212,160,23,0.4); }
+
+  .hero-stats {
+    display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+    margin-top:1rem;
+  }
+  .stat { text-align:center; color:rgba(255,255,255,0.8); }
+  .stat strong { display:block; font-size:1.8rem; color:var(--gold-light); font-family:'Amiri',serif; }
+
+  /* SCROLL HINT */
+  .scroll-hint {
+    position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+    color:rgba(255,255,255,0.4); font-size:0.8rem;
+    display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+  }
+  .scroll-arrow { width:20px; height:20px; border-right:2px solid; border-bottom:2px solid; transform:rotate(45deg); animation:bounce .8s infinite alternate; }
+  @keyframes bounce { from{transform:rotate(45deg) translateY(0)} to{transform:rotate(45deg) translateY(5px)} }
+
+  /* FEATURES SECTION */
+  .section { padding:5rem 2rem; max-width:1100px; margin:0 auto; }
+  .section-title { font-family:'Amiri',serif; font-size:2.2rem; color:var(--green); margin-bottom:0.5rem; }
+  .section-sub { color:var(--muted); margin-bottom:3rem; }
+
+  .cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1.5rem; }
+  .card {
+    background:white;
+    border-radius:16px;
+    padding:1.8rem;
+    border:1px solid #e8ede8;
+    transition:transform .2s, box-shadow .2s;
+    cursor:pointer;
+    text-decoration:none; color:inherit;
+  }
+  .card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+  .card-icon { font-size:2.5rem; margin-bottom:1rem; }
+  .card h3 { font-size:1.1rem; font-weight:600; margin-bottom:0.4rem; color:var(--green); }
+  .card p { font-size:0.9rem; color:var(--muted); line-height:1.5; }
+
+  /* ADD CTA */
+  .cta-section {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+    margin:0 2rem 4rem; border-radius:20px;
+    padding:3rem 2rem; text-align:center; color:white;
+  }
+  .cta-section h2 { font-family:'Amiri',serif; font-size:2rem; margin-bottom:0.75rem; }
+  .cta-section p { color:rgba(255,255,255,0.75); margin-bottom:1.5rem; }
+  .btn-cta {
+    display:inline-block;
+    padding:0.85rem 2.5rem;
+    background:var(--gold);
+    color:var(--green);
+    border-radius:10px;
+    font-weight:600; font-size:1rem;
+    text-decoration:none;
+    transition:transform .15s;
+  }
+  .btn-cta:hover { transform:scale(1.03); }
+
+  footer {
+    background:var(--green);
+    color:rgba(255,255,255,0.6);
+    text-align:center;
+    padding:1.5rem;
+    font-size:0.85rem;
+  }
+  footer span { color:var(--gold-light); }
+
+  .success-banner {
+    background:#d1fae5; border:1px solid #6ee7b7;
+    color:#065f46; padding:0.75rem 1.5rem;
+    text-align:center; font-size:0.95rem;
+  }
+</style>
+</head>
+<body>
+
+{% if request.args.get('added') %}
+<div class="success-banner">✅ Mosque submitted successfully! It will appear after review.</div>
+{% endif %}
+
+<div class="hero">
+  <nav>
+    <a href="/" class="logo">🕌 Dubai Iftar Finder</a>
+    <div class="nav-links">
+      <a href="/search">Browse All</a>
+      <a href="/add">Add Mosque</a>
+    </div>
+  </nav>
+
+  <div class="hero-content">
+    <div class="mosque-icon">🕌</div>
+    <div class="badge">🌙 Ramadan Mubarak — Dubai & UAE</div>
+    <h1 class="hero-title">Find <span>Iftar</span> Near You</h1>
+    <p class="hero-arabic">ابحث عن مساجد الإفطار في دبي</p>
+    <p class="hero-sub">Discover mosques offering Iftar meals across Dubai. Free food, open to everyone — Muslims and community guests.</p>
+
+    <div class="search-box">
+      <form action="/search" method="get" class="search-row">
+        <input class="search-input" type="text" name="q" placeholder="Search mosque name or area...">
+        <select class="search-select" name="area">
+          <option value="">All Areas</option>
+          {% for area in areas %}
+          <option value="{{ area.area }}">{{ area.area }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="btn-search">🔍 Search</button>
+      </form>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><strong>{{ total }}+</strong> Mosques Listed</div>
+      <div class="stat"><strong>Dubai</strong> UAE Coverage</div>
+      <div class="stat"><strong>Free</strong> Iftar Meals</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title">How It Works</h2>
+  <p class="section-sub">Three simple steps to find your Iftar</p>
+  <div class="cards">
+    <a href="/search" class="card">
+      <div class="card-icon">🔍</div>
+      <h3>Search Your Area</h3>
+      <p>Find mosques by name, area, or neighborhood across Dubai and UAE.</p>
+    </a>
+    <a href="/search" class="card">
+      <div class="card-icon">🕌</div>
+      <h3>View Mosque Details</h3>
+      <p>See address, Iftar time, capacity, contact info, and directions.</p>
+    </a>
+    <a href="/add" class="card">
+      <div class="card-icon">➕</div>
+      <h3>Add a Mosque</h3>
+      <p>Know a mosque offering Iftar? Submit it to help the community.</p>
+    </a>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>Know a Mosque Offering Iftar?</h2>
+  <p>Help your community by adding it to our directory.</p>
+  <a href="/add" class="btn-cta">+ Add Mosque</a>
+</div>
+
+<footer>
+  Built with ❤️ for the community &nbsp;|&nbsp; <span>Dubai Iftar Finder</span> &nbsp;|&nbsp; Ramadan Kareem 🌙
+</footer>
+
+</body>
+</html>
