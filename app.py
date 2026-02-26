@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import sqlite3
 import os
+import tempfile
 app = Flask(__name__)
-DB = "mosques.db"
+DB = os.path.join(tempfile.gettempdir(), "mosques.db")
 
 def get_db():
     conn = sqlite3.connect(DB)
