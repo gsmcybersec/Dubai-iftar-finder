@@ -3,442 +3,360 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UAE Iftar Finder — Mosques & Iftar Kits Across UAE</title>
-<meta name="description" content="Find mosques and Iftar kit distribution points across all UAE Emirates during Ramadan. Community powered, always free.">
+<title>UAE Iftar Finder — Find Free Iftar Meals Across UAE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy:#0a0f1e; --navy2:#111827; --navy3:#1e2a3a;
-  --gold:#c9922a; --gold2:#e8b84b; --gold3:#fde68a;
-  --white:#fff; --muted:#94a3b8;
-  --border:rgba(201,146,42,0.2); --card-bg:#141c2e;
+:root{
+  --g:#1B4332;--g2:#2D6A4F;--g3:#40916C;--gl:#D8F3DC;--gp:#F0FAF4;
+  --gd:#D4A017;--gd2:#B5850A;--gdp:#FFFBEB;
+  --w:#FFFFFF;--bg:#F7F5F0;--tx:#1C1C1E;--mu:#6B7280;
+  --br:#E5DDD0;--sh:rgba(27,67,50,0.07);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx)}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+nav{background:var(--w);border-bottom:2px solid var(--gl);padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:64px;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px var(--sh)}
 .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
-.logo-text{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white)}
-.logo-text span{color:var(--gold2)}
-.nav-links{display:flex;align-items:center;gap:.4rem}
-.nav-links a{color:var(--muted);text-decoration:none;padding:.5rem 1rem;border-radius:8px;font-size:.88rem;transition:all .2s}
-.nav-links a:hover{color:var(--white);background:rgba(255,255,255,.05)}
-.nav-btn{background:linear-gradient(135deg,var(--gold),var(--gold2)) !important;color:var(--navy) !important;font-weight:700 !important}
+.logo-i{width:36px;height:36px;background:var(--g);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.logo-t{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--g)}
+.logo-t span{color:var(--gd)}
+.nav-r{display:flex;align-items:center;gap:.2rem}
+.nav-r a{color:var(--mu);text-decoration:none;padding:.45rem .85rem;border-radius:7px;font-size:.875rem;font-weight:500;transition:all .2s}
+.nav-r a:hover{color:var(--g);background:var(--gp)}
+.nav-add{background:var(--g)!important;color:#fff!important;font-weight:600!important}
+.nav-add:hover{background:var(--g2)!important;color:#fff!important}
 
-/* HERO */
-.hero{min-height:96vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5rem 1.5rem 3rem;position:relative;overflow:hidden}
-.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(201,146,42,0.1) 0%,transparent 65%);pointer-events:none}
-.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(201,146,42,0.07) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.nb{background:linear-gradient(90deg,var(--g),var(--g2));color:#fff;padding:.65rem 1.5rem;text-align:center;font-size:.84rem;display:none;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap}
+.nb.show{display:flex}
+.nd{width:7px;height:7px;background:#86efac;border-radius:50%;animation:blink 1.4s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-.hero-badge{position:relative;z-index:1;display:inline-flex;align-items:center;gap:.5rem;background:rgba(201,146,42,0.1);border:1px solid rgba(201,146,42,0.3);color:var(--gold2);padding:.4rem 1.2rem;border-radius:999px;font-size:.82rem;font-weight:500;margin-bottom:1.75rem;letter-spacing:.02em}
+.sb{background:#dcfce7;border-bottom:1px solid #bbf7d0;color:#166534;padding:.75rem 1.5rem;text-align:center;font-size:.875rem}
 
-.hero-tagline{position:relative;z-index:1;font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.45);margin-bottom:1rem;letter-spacing:.01em}
+.hero{background:var(--w);padding:5rem 1.5rem 4rem;text-align:center;border-bottom:1px solid var(--br);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),var(--gd),var(--g3))}
+.hbadge{display:inline-flex;align-items:center;gap:.4rem;background:var(--gp);color:var(--g);padding:.35rem 1rem;border-radius:999px;font-size:.78rem;font-weight:600;margin-bottom:1.5rem;border:1px solid var(--gl)}
+.htag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.9rem,2vw,1.1rem);color:var(--mu);margin-bottom:.6rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6.5vw,4.8rem);font-weight:700;color:var(--g);line-height:1.05;margin-bottom:.6rem}
+.htitle .gd{color:var(--gd)}
+.har{font-size:clamp(.9rem,2vw,1.2rem);color:var(--mu);direction:rtl;margin-bottom:.75rem;font-style:italic}
+.hdesc{font-size:.95rem;color:var(--mu);max-width:460px;margin:0 auto 2.5rem;line-height:1.75}
 
-.hero-title{position:relative;z-index:1;font-family:'Playfair Display',serif;font-size:clamp(3rem,7.5vw,5.8rem);font-weight:700;line-height:1.05;margin-bottom:.75rem}
-.hero-title .highlight{background:linear-gradient(135deg,var(--gold),var(--gold2) 60%,var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pw{background:var(--bg);border:1.5px solid var(--br);border-radius:14px;padding:1.2rem 1.5rem;max-width:660px;margin:0 auto 2rem;text-align:left}
+.pwh{display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem;flex-wrap:wrap;gap:.4rem}
+.pwl{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g)}
+.pwc{font-size:.78rem;color:var(--mu)}
+.pr{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.pi{flex:1;min-width:68px;text-align:center;padding:.55rem .3rem;border-radius:9px;border:1.5px solid transparent;transition:all .2s}
+.pi.active{background:var(--g);border-color:var(--g)}
+.pi.active .pn{color:rgba(255,255,255,.6)}
+.pi.active .pt{color:#fff}
+.pn{font-size:.62rem;text-transform:uppercase;letter-spacing:.07em;color:var(--mu);margin-bottom:.2rem}
+.pt{font-size:.9rem;font-weight:600;color:var(--tx)}
+.pnx{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--br);text-align:center;font-size:.8rem;color:var(--mu)}
+.pnx span{color:var(--g);font-weight:600}
+.pload{text-align:center;padding:.5rem;color:var(--mu);font-size:.875rem}
 
-.hero-arabic{position:relative;z-index:1;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(255,255,255,.4);margin-bottom:.5rem;direction:rtl;font-style:italic}
+.sw{max-width:600px;margin:0 auto 1.5rem}
+.sb2{background:var(--w);border:1.5px solid var(--br);border-radius:14px;padding:1rem;display:flex;gap:.65rem;flex-wrap:wrap;box-shadow:0 4px 20px var(--sh)}
+.si{flex:2;min-width:180px;background:var(--bg);border:1.5px solid var(--br);border-radius:9px;padding:.75rem 1rem;color:var(--tx);font-size:.9rem;font-family:'DM Sans',sans-serif;outline:none;transition:border .2s}
+.si:focus{border-color:var(--g)}
+.ss{flex:1;min-width:140px;background:var(--bg);border:1.5px solid var(--br);border-radius:9px;padding:.75rem .9rem;color:var(--tx);font-size:.875rem;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer}
+.ss:focus{border-color:var(--g)}
+.bsearch{padding:.75rem 1.5rem;background:var(--g);color:#fff;border:none;border-radius:9px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .2s}
+.bsearch:hover{background:var(--g2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(27,67,50,.25)}
 
-.hero-desc{position:relative;z-index:1;font-size:1rem;color:var(--muted);max-width:500px;line-height:1.75;margin:1.25rem auto 2.5rem}
-.hero-desc strong{color:rgba(255,255,255,.7)}
+.nm{display:inline-flex;align-items:center;gap:.4rem;background:var(--gdp);color:var(--gd2);border:1.5px solid rgba(181,133,10,.2);padding:.55rem 1.2rem;border-radius:9px;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;margin-bottom:2.5rem}
+.nm:hover{background:#fef3c7;border-color:var(--gd)}
 
-/* PRAYER WIDGET */
-.prayer-widget{position:relative;z-index:1;background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.25rem 1.75rem;margin-bottom:2.5rem;max-width:720px;width:100%}
-.pw-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
-.pw-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
-.pw-city{font-size:.8rem;color:var(--muted)}
-.prayers-row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
-.p-item{text-align:center;flex:1;min-width:72px;padding:.5rem .25rem;border-radius:10px;transition:background .2s}
-.p-item.active{background:rgba(201,146,42,0.1);border:1px solid rgba(201,146,42,.2)}
-.p-name{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem}
-.p-time{font-size:.95rem;font-weight:600;color:var(--white)}
-.p-item.active .p-time{color:var(--gold2)}
-.p-item.active .p-name{color:var(--gold)}
-.pw-next{margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--border);text-align:center;font-size:.82rem;color:var(--muted)}
-.pw-next span{color:var(--gold2);font-weight:600}
-.pw-loading{text-align:center;color:var(--muted);font-size:.875rem;padding:.5rem}
-
-/* SEARCH */
-.search-wrap{position:relative;z-index:1;width:100%;max-width:700px;margin-bottom:2.5rem}
-.search-box{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap}
-.s-input{flex:2;min-width:200px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.85rem 1.2rem;color:var(--white);font-size:.95rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border .2s}
-.s-input::placeholder{color:rgba(255,255,255,.28)}
-.s-input:focus{border-color:var(--gold)}
-.s-select{flex:1;min-width:150px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.85rem 1rem;color:var(--white);font-size:.88rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;cursor:pointer}
-.s-select option{background:var(--navy2);color:var(--white)}
-.btn-search{padding:.85rem 1.75rem;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap}
-.btn-search:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,146,42,.4)}
-
-/* STATS */
-.stats{position:relative;z-index:1;display:flex;gap:3rem;flex-wrap:wrap;justify-content:center}
+.stats{display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center}
 .stat{text-align:center}
-.stat-num{display:block;font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.stat-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:.35rem}
+.sn{display:block;font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--g);line-height:1}
+.sl{font-size:.72rem;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;margin-top:.3rem}
 
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0}
+.dvd{height:1px;background:var(--br)}
+.sec{padding:4rem 2rem;max-width:1140px;margin:0 auto}
+.stag{font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--g3);margin-bottom:.5rem}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--g);margin-bottom:.5rem;line-height:1.2}
+.ssub{color:var(--mu);font-size:.9rem;max-width:440px}
 
-/* SECTIONS */
-.section{padding:5rem 2rem;max-width:1160px;margin:0 auto}
-.s-tag{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);margin-bottom:.65rem}
-.s-title{font-family:'Playfair Display',serif;font-size:2.1rem;color:var(--white);margin-bottom:.6rem;line-height:1.2}
-.s-sub{color:var(--muted);font-size:.95rem;max-width:480px}
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:.85rem;margin-top:2rem}
+.ecard{background:var(--w);border:1.5px solid var(--br);border-radius:13px;padding:1.25rem;text-decoration:none;color:inherit;transition:all .22s;display:flex;align-items:center;gap:.85rem;box-shadow:0 2px 8px var(--sh)}
+.ecard:hover{border-color:var(--g);transform:translateY(-2px);box-shadow:0 8px 24px var(--sh)}
+.ee{font-size:1.8rem;flex-shrink:0}
+.en{font-weight:600;color:var(--g);font-size:.9rem}
+.ec{font-size:.77rem;color:var(--mu);margin-top:.15rem}
 
-/* EMIRATES */
-.emirate-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem;margin-top:2.5rem}
-.emirate-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.4rem;text-decoration:none;color:inherit;transition:all .25s;display:flex;align-items:center;gap:1rem;position:relative;overflow:hidden}
-.emirate-card::after{content:'→';position:absolute;right:1.2rem;color:var(--gold);opacity:0;transform:translateX(-5px);transition:all .25s}
-.emirate-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 10px 35px rgba(0,0,0,.45);background:#1a2336}
-.emirate-card:hover::after{opacity:1;transform:translateX(0)}
-.e-emoji{font-size:2rem;flex-shrink:0}
-.e-name{font-weight:600;color:var(--white);font-size:.95rem}
-.e-count{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.csec{padding:0 2rem 3rem;max-width:1140px;margin:0 auto}
+.ctl{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:.8rem}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:.3rem;background:var(--w);border:1.5px solid var(--br);color:var(--tx);padding:.4rem .95rem;border-radius:999px;font-size:.82rem;font-weight:500;text-decoration:none;transition:all .2s}
+.chip:hover{border-color:var(--g);color:var(--g);background:var(--gp)}
 
-/* IFTAR KITS SECTION */
-.kits-intro{background:var(--card-bg);border:1px solid rgba(255,165,0,.25);border-radius:16px;padding:1.75rem;margin-bottom:2rem;display:flex;gap:1.25rem;align-items:flex-start}
-.kits-icon{font-size:2.5rem;flex-shrink:0;margin-top:.2rem}
-.kits-intro h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.4rem;color:var(--white)}
-.kits-intro p{color:var(--muted);font-size:.9rem;line-height:1.6}
-.kits-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem}
-.kit-card{background:var(--card-bg);border:1px solid rgba(255,165,0,.2);border-radius:14px;padding:1.4rem;transition:all .25s}
-.kit-card:hover{border-color:rgba(255,165,0,.5);transform:translateY(-2px)}
-.kit-tag{display:inline-block;background:rgba(255,140,0,.12);color:#ffa040;border:1px solid rgba(255,140,0,.25);font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:999px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
-.kit-card h4{font-weight:600;color:var(--white);margin-bottom:.3rem;font-size:.95rem}
-.kit-card p{font-size:.83rem;color:var(--muted);line-height:1.5}
-.kit-card .kit-meta{margin-top:.75rem;font-size:.78rem;color:rgba(255,140,0,.7);display:flex;align-items:center;gap:.4rem}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1rem;margin-top:2rem}
+.kcard{background:var(--w);border:1.5px solid var(--br);border-radius:13px;padding:1.4rem;box-shadow:0 2px 8px var(--sh);transition:all .22s}
+.kcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--sh);border-color:var(--gd)}
+.ktag{display:inline-block;background:var(--gdp);color:var(--gd2);border:1px solid rgba(181,133,10,.2);font-size:.68rem;font-weight:700;padding:.2rem .65rem;border-radius:999px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.75rem}
+.kcard h4{font-weight:600;color:var(--tx);margin-bottom:.35rem;font-size:.92rem}
+.kcard p{font-size:.84rem;color:var(--mu);line-height:1.55}
+.km{margin-top:.75rem;font-size:.77rem;color:var(--g3);font-weight:500}
+.kadd{border-color:rgba(181,133,10,.25)!important;background:var(--gdp)!important}
 
-/* WHY US */
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:2.5rem}
-.why-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:border .2s}
-.why-card:hover{border-color:rgba(201,146,42,.4)}
-.why-icon{width:46px;height:46px;border-radius:12px;background:rgba(201,146,42,.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:1.1rem}
-.why-card h3{font-size:.95rem;font-weight:600;margin-bottom:.45rem;color:var(--white)}
-.why-card p{font-size:.85rem;color:var(--muted);line-height:1.6}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:1rem;margin-top:2rem}
+.wcard{background:var(--w);border:1.5px solid var(--br);border-radius:13px;padding:1.6rem;box-shadow:0 2px 8px var(--sh);transition:border .2s}
+.wcard:hover{border-color:var(--g3)}
+.wi{width:44px;height:44px;border-radius:11px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem}
+.wcard h3{font-size:.92rem;font-weight:600;color:var(--g);margin-bottom:.4rem}
+.wcard p{font-size:.84rem;color:var(--mu);line-height:1.6}
 
-/* MISSION */
-.mission-band{background:linear-gradient(135deg,var(--navy3),#1a2535);border:1px solid var(--border);border-radius:20px;padding:4rem 3rem;margin:0 2rem;position:relative;overflow:hidden}
-.mission-band::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(201,146,42,0.08),transparent 70%);pointer-events:none}
-.mission-inner{max-width:700px}
-.mission-band .s-tag{margin-bottom:.65rem}
-.mission-band .s-title{font-size:2.2rem;margin-bottom:1.25rem}
-.mission-text{color:rgba(255,255,255,.6);line-height:1.9;font-size:.97rem;margin-bottom:1rem}
-.mission-text strong{color:var(--gold2)}
-.mission-disclaimer{font-size:.8rem;color:rgba(148,163,184,.5);margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);line-height:1.6}
-.mission-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
-.btn-gold{display:inline-flex;align-items:center;gap:.4rem;padding:.85rem 2rem;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border-radius:10px;font-weight:700;text-decoration:none;transition:all .2s;font-size:.92rem}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,146,42,.4)}
-.btn-outline{display:inline-flex;align-items:center;gap:.4rem;padding:.85rem 2rem;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.2);border-radius:10px;font-weight:600;text-decoration:none;transition:all .2s;font-size:.92rem}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold2)}
+.mband{background:var(--g);border-radius:20px;padding:4rem 3rem;margin:0 2rem 4rem;position:relative;overflow:hidden}
+.mband::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(255,255,255,.05),transparent 70%);pointer-events:none}
+.min{max-width:680px}
+.mband .stag{color:rgba(255,255,255,.4)}
+.mband .stitle{color:#fff;font-size:2.2rem}
+.mt{color:rgba(255,255,255,.68);line-height:1.85;font-size:.95rem;margin-bottom:1rem}
+.mt strong{color:#fde68a}
+.md{font-size:.77rem;color:rgba(255,255,255,.35);margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.1);line-height:1.6}
+.mbtns{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.bw{display:inline-flex;align-items:center;gap:.4rem;padding:.8rem 1.75rem;background:#fff;color:var(--g);border-radius:9px;font-weight:700;text-decoration:none;transition:all .2s;font-size:.9rem}
+.bw:hover{background:var(--bg);transform:translateY(-1px)}
+.bow{display:inline-flex;align-items:center;gap:.4rem;padding:.8rem 1.75rem;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);border-radius:9px;font-weight:600;text-decoration:none;transition:all .2s;font-size:.9rem}
+.bow:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 
-/* FOOTER */
-footer{background:var(--navy2);border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:5rem}
-.footer-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
-.footer-left .built-by{font-family:'Playfair Display',serif;color:var(--gold2);font-size:1.1rem;margin-bottom:.3rem}
-.footer-left .built-sub{font-size:.8rem;color:var(--muted)}
-.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
-.footer-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
-.footer-links a:hover{color:var(--gold2)}
-.footer-bottom{max-width:1000px;margin:.75rem auto 0;padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
-.footer-copy{font-size:.78rem;color:rgba(148,163,184,.4)}
+footer{background:var(--g);padding:2.5rem 2rem 1.5rem}
+.fi{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.fb .fn{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#fde68a;margin-bottom:.3rem}
+.fb .fs{font-size:.82rem;color:rgba(255,255,255,.45)}
+.fl{display:flex;gap:2rem;flex-wrap:wrap}
+.fl a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.875rem;transition:color .2s}
+.fl a:hover{color:#fde68a}
+.fbot{max-width:1100px;margin:.75rem auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.fc{font-size:.77rem;color:rgba(255,255,255,.3)}
 
-/* BANNER */
-.success-banner{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);color:#6ee7b7;padding:.85rem 1.5rem;text-align:center;font-size:.88rem}
-
-/* MOBILE */
 @media(max-width:640px){
-  nav{padding:.85rem 1rem}
-  .nav-links a:not(.nav-btn){display:none}
-  .hero{padding:3.5rem 1rem 2.5rem;min-height:auto}
-  .prayers-row{gap:.4rem}
-  .p-item{min-width:52px}
-  .p-time{font-size:.85rem}
-  .search-box{flex-direction:column}
-  .s-input,.s-select,.btn-search{width:100%;min-width:unset}
+  nav{padding:0 1rem}
+  .nav-r a:not(.nav-add){display:none}
+  .hero{padding:3.5rem 1rem 3rem}
+  .sb2{flex-direction:column}
+  .si,.ss,.bsearch{width:100%;min-width:unset}
   .stats{gap:1.5rem}
-  .section{padding:3rem 1rem}
-  .mission-band{margin:0 1rem;padding:2.5rem 1.5rem}
-  .footer-inner{flex-direction:column;text-align:center}
-  .footer-links{justify-content:center}
-  .footer-bottom{justify-content:center;text-align:center}
-  .kits-intro{flex-direction:column}
+  .sec{padding:3rem 1rem}
+  .csec{padding:0 1rem 2rem}
+  .mband{margin:0 1rem 3rem;padding:2.5rem 1.5rem}
+  .fi{flex-direction:column}
 }
 </style>
 </head>
 <body>
-
 {% if request.args.get('added') %}
-<div class="success-banner">✅ Mosque submitted! It will appear after review. Jazakallah Khair 🌙</div>
+<div class="sb">✅ Mosque submitted! It will appear after review. Jazakallah Khair 🌙</div>
 {% endif %}
+
+<div class="nb" id="nb">
+  <span class="nd"></span>
+  <span id="nbt">🔔 Etisalat distributing free Iftar kits at Union Metro — until 6:30 PM today!</span>
+  <button onclick="document.getElementById('nb').classList.remove('show')" class="notif-close" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:20px;height:20px;border-radius:50%;cursor:pointer;font-size:.7rem;margin-left:.5rem">✕</button>
+</div>
 
 <nav>
   <a href="/" class="logo">
-    <div class="logo-icon">🕌</div>
-    <span class="logo-text">UAE <span>Iftar</span> Finder</span>
+    <div class="logo-i">🕌</div>
+    <span class="logo-t">UAE <span>Iftar</span> Finder</span>
   </a>
-  <div class="nav-links">
+  <div class="nav-r">
     <a href="/search">Browse</a>
-    <a href="/search?iftar_time=After+Asr">Early Iftar</a>
+    <a href="/search?iftar_time=After+Asr">⏰ Early Iftar</a>
     <a href="/search?food=Biryani">🍚 Biryani</a>
-    <a href="/add" class="nav-btn">+ Add Mosque</a>
+    <a href="/add" class="nav-add">+ Add Mosque</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-dots"></div>
+  <div class="hbadge">🌙 Ramadan 2026 · All 7 UAE Emirates</div>
+  <p class="htag">"A Place of Blessings, A Meal for Everyone"</p>
+  <h1 class="htitle">Find <span class="gd">Iftar</span><br>Near You in UAE</h1>
+  <p class="har">ابحث عن مساجد الإفطار في الإمارات العربية المتحدة</p>
+  <p class="hdesc">Your guide to discovering mosques and community spots serving Iftar meals during Ramadan across the UAE.</p>
 
-  <div class="hero-badge">🌙 Ramadan 2026 · All 7 UAE Emirates</div>
-
-  <p class="hero-tagline">"A Place of Blessings, A Meal for Everyone"</p>
-
-  <h1 class="hero-title">
-    Find <span class="highlight">Iftar</span><br>Near You in UAE
-  </h1>
-
-  <p class="hero-arabic">ابحث عن مساجد الإفطار في الإمارات العربية المتحدة</p>
-
-  <p class="hero-desc">
-    Your guide to discovering mosques serving Iftar meals during Ramadan across the UAE.
-    <strong>Connect with your community</strong> and find nearby mosques, metro stations,
-    and community spots offering meals — updated by locals, for locals.
-  </p>
-
-  <!-- PRAYER TIMES -->
-  <div class="prayer-widget">
-    <div class="pw-header">
-      <span class="pw-label">🕐 Today's Prayer Times</span>
-      <span class="pw-city" id="pw-city-label">📍 Dubai, UAE</span>
+  <div class="pw">
+    <div class="pwh">
+      <span class="pwl">🕐 Today's Prayer Times</span>
+      <span class="pwc" id="pwc">📍 Dubai, UAE</span>
     </div>
-    <div id="prayer-content">
-      <div class="pw-loading">Loading prayer times...</div>
-    </div>
+    <div id="pc"><div class="pload">Loading prayer times...</div></div>
   </div>
 
-  <!-- SEARCH -->
-  <div class="search-wrap">
-    <form action="/search" method="get" class="search-box">
-      <input class="s-input" type="text" name="q" placeholder="🔍 Mosque name, area, Biryani, Mandi...">
-      <select class="s-select" name="city">
+  <div class="sw">
+    <form action="/search" method="get" class="sb2">
+      <input class="si" type="text" name="q" placeholder="🔍 Mosque, area, Biryani, Mandi...">
+      <select class="ss" name="city" id="cs">
         <option value="">🏙️ All Emirates</option>
         {% for c in cities %}
         <option value="{{ c.city }}">{{ c.city }} ({{ c.cnt }})</option>
         {% endfor %}
       </select>
-      <button type="submit" class="btn-search">Search →</button>
+      <button type="submit" class="bsearch">Search</button>
     </form>
   </div>
 
+  <button class="nm" onclick="findNearMe()">📍 Find Nearest Mosque</button>
+
   <div class="stats">
-    <div class="stat"><span class="stat-num">{{ total }}+</span><span class="stat-label">Mosques</span></div>
-    <div class="stat"><span class="stat-num">7</span><span class="stat-label">Emirates</span></div>
-    <div class="stat"><span class="stat-num">Free</span><span class="stat-label">Iftar Meals</span></div>
-    <div class="stat"><span class="stat-num">Live</span><span class="stat-label">Updates</span></div>
+    <div class="stat"><span class="sn">{{ total }}+</span><span class="sl">Mosques</span></div>
+    <div class="stat"><span class="sn">7</span><span class="sl">Emirates</span></div>
+    <div class="stat"><span class="sn">Free</span><span class="sl">Iftar Meals</span></div>
+    <div class="stat"><span class="sn">Live</span><span class="sl">Prayer Times</span></div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="dvd"></div>
 
-<!-- EMIRATES -->
-<div class="section">
-  <div class="s-tag">Browse by Location</div>
-  <h2 class="s-title">Choose Your Emirate</h2>
-  <p class="s-sub">All 7 Emirates covered — tap to see every Iftar mosque near you</p>
-  {% set icons = {'Dubai':'🏙️','Abu Dhabi':'🏛️','Sharjah':'🌿','Ajman':'⚓','Ras Al Khaimah':'⛰️','Fujairah':'🌊','Umm Al Quwain':'🌴','Al Ain':'🌺'} %}
-  <div class="emirate-grid">
+<div class="sec">
+  <div class="stag">Browse by Location</div>
+  <h2 class="stitle">Choose Your Emirate</h2>
+  <p class="ssub">All 7 Emirates covered — tap to find Iftar near you</p>
+  {% set icons={'Dubai':'🏙️','Abu Dhabi':'🏛️','Sharjah':'🌿','Ajman':'⚓','Ras Al Khaimah':'⛰️','Fujairah':'🌊','Umm Al Quwain':'🌴','Al Ain':'🌺'} %}
+  <div class="egrid">
     {% for c in cities %}
-    <a href="/search?city={{ c.city }}" class="emirate-card">
-      <div class="e-emoji">{{ icons.get(c.city,'🕌') }}</div>
+    <a href="/search?city={{ c.city }}" class="ecard">
+      <div class="ee">{{ icons.get(c.city,'🕌') }}</div>
       <div>
-        <div class="e-name">{{ c.city }}</div>
-        <div class="e-count">{{ c.cnt }} mosque{% if c.cnt!=1 %}s{% endif %} listed</div>
+        <div class="en">{{ c.city }}</div>
+        <div class="ec">{{ c.cnt }} mosque{% if c.cnt!=1 %}s{% endif %}</div>
       </div>
     </a>
     {% endfor %}
   </div>
 </div>
 
-<div class="divider"></div>
-
-<!-- IFTAR KITS - LIVE COMMUNITY SPOTS -->
-<div class="section">
-  <div class="s-tag">Beyond Mosques</div>
-  <h2 class="s-title">Iftar Kits & Community Spots</h2>
-  <p class="s-sub">Metro stations, community centers and public spots distributing Iftar kits and meals</p>
-
-  <div class="kits-intro" style="margin-top:2rem">
-    <div class="kits-icon">📦</div>
-    <div>
-      <h3>Know a spot giving out Iftar kits?</h3>
-      <p>Many organisations, companies and individuals set up Iftar distribution at metro stations, bus stops, labor camps and public areas across UAE during Ramadan. These spots are not always mosques — help us list them all so no one goes hungry.</p>
-    </div>
+<div class="csec">
+  <div class="ctl">Quick Filter by Food Type</div>
+  <div class="chips">
+    {% for ft in food_types %}
+    <a href="/search?food={{ ft }}" class="chip">🍽️ {{ ft }}</a>
+    {% endfor %}
+    <a href="/search?iftar_time=After+Asr" class="chip">⏰ Early Iftar (After Asr)</a>
   </div>
+</div>
 
-  <div class="kits-grid">
-    <div class="kit-card">
-      <div class="kit-tag">🚇 Metro Station</div>
+<div class="dvd"></div>
+
+<div class="sec">
+  <div class="stag">Beyond Mosques</div>
+  <h2 class="stitle">Iftar Kits & Community Spots</h2>
+  <p class="ssub">Metro stations, parks and community centres distributing Iftar kits</p>
+  <div class="kgrid">
+    <div class="kcard">
+      <div class="ktag">🚇 Metro Station</div>
       <h4>Union Metro Station, Dubai</h4>
-      <p>Multiple organisations distribute Iftar kits near the main entrance. Dates, water, and meal boxes available before Maghrib.</p>
-      <div class="kit-meta">📍 Deira, Dubai &nbsp;·&nbsp; 🌙 Before Maghrib</div>
+      <p>Multiple organisations distribute Iftar kits near the main entrance. Dates, water and meal boxes before Maghrib.</p>
+      <div class="km">📍 Deira, Dubai · 🌙 Before Maghrib</div>
     </div>
-    <div class="kit-card">
-      <div class="kit-tag">🏢 Community</div>
+    <div class="kcard">
+      <div class="ktag">🏢 Workers Area</div>
       <h4>Al Quoz Labor Camps</h4>
-      <p>Various charities and companies distribute free Iftar meal boxes to workers in the Al Quoz industrial area daily.</p>
-      <div class="kit-meta">📍 Al Quoz, Dubai &nbsp;·&nbsp; 🌙 Maghrib</div>
+      <p>Various charities distribute free Iftar meal boxes to workers in Al Quoz industrial area daily.</p>
+      <div class="km">📍 Al Quoz, Dubai · 🌙 Maghrib</div>
     </div>
-    <div class="kit-card">
-      <div class="kit-tag">📦 Distribution Point</div>
+    <div class="kcard">
+      <div class="ktag">📦 Community Spot</div>
       <h4>Karama Park, Dubai</h4>
-      <p>Community-organised Iftar distribution. Biryani and meal boxes. Run by volunteers — quantities limited, come early.</p>
-      <div class="kit-meta">📍 Al Karama, Dubai &nbsp;·&nbsp; 🌙 5:00 PM onwards</div>
+      <p>Volunteer-run Iftar distribution. Biryani and meal boxes. Limited quantities — come early.</p>
+      <div class="km">📍 Al Karama, Dubai · 🌙 5:00 PM+</div>
     </div>
-    <div class="kit-card" style="border-color:rgba(201,146,42,.3);background:rgba(201,146,42,.04)">
-      <div class="kit-tag" style="background:rgba(201,146,42,.12);color:var(--gold2);border-color:rgba(201,146,42,.3)">➕ You Know One?</div>
-      <h4 style="color:var(--gold2)">Add a Community Spot</h4>
-      <p>If you know of any location — metro station, park, camp, office — distributing Iftar kits, add it so the community can benefit.</p>
-      <div style="margin-top:1rem"><a href="/add" style="color:var(--gold2);font-weight:600;font-size:.85rem;text-decoration:none">Add Location →</a></div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- WHY US -->
-<div class="section">
-  <div class="s-tag">Why UAE Iftar Finder</div>
-  <h2 class="s-title">Your Trusted Ramadan Guide</h2>
-  <p class="s-sub">Everything you need to find Iftar across the UAE, in one place</p>
-  <div class="why-grid">
-    <div class="why-card">
-      <div class="why-icon">🕐</div>
-      <h3>Live Prayer Times</h3>
-      <p>Real-time daily prayer times for every UAE emirate. Know exactly when Maghrib is today — no guessing.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🗺️</div>
-      <h3>Full UAE Coverage</h3>
-      <p>All 7 Emirates — Dubai, Abu Dhabi, Sharjah, Ajman, RAK, Fujairah, UAQ and Al Ain all covered.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🍽️</div>
-      <h3>Filter by Food Type</h3>
-      <p>Find Biryani, Mandi, Rice, Snacks or mixed meals. Know what's being served before you go.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">📲</div>
-      <h3>WhatsApp Share</h3>
-      <p>Found a good Iftar spot? Share it with your family and friends instantly on WhatsApp.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">👥</div>
-      <h3>Community Powered</h3>
-      <p>Built and updated by locals. Real reviews, authentic notes, verified by the community for the community.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">📦</div>
-      <h3>Beyond Mosques</h3>
-      <p>We list metro stations, parks, community centers and anywhere Iftar kits are distributed — not just mosques.</p>
+    <div class="kcard kadd">
+      <div class="ktag">➕ Add a Spot</div>
+      <h4 style="color:var(--gd2)">Know an Iftar Kit Location?</h4>
+      <p>Metro, park, camp or anywhere distributing kits — add it for the community.</p>
+      <div style="margin-top:1rem"><a href="/add" style="color:var(--gd2);font-weight:600;font-size:.85rem;text-decoration:none">Add Location →</a></div>
     </div>
   </div>
 </div>
 
-<!-- MISSION -->
-<div class="mission-band">
-  <div class="mission-inner">
-    <div class="s-tag">Our Mission</div>
-    <h2 class="s-title">No One Goes Hungry<br>This Ramadan</h2>
-    <p class="mission-text">
-      The UAE is home to over <strong>3 million Muslims</strong> from every corner of the world —
-      laborers, professionals, families and students — all observing Ramadan far from home.
-      During this holy month, hundreds of mosques, organisations and individuals open their doors
-      and hearts to feed the community.
-    </p>
-    <p class="mission-text">
-      Our mission is simple: <strong>connect people with Iftar</strong>. Whether you are a worker who has
-      just finished a long shift, a family looking for a community Iftar, or someone who simply wants
-      to break their fast with others — UAE Iftar Finder helps you find a meal, a mosque, and a community.
-    </p>
-    <p class="mission-text">
-      This platform is <strong>free, open and community-driven</strong>. Every mosque you add,
-      every note you write, helps someone find Iftar tonight.
-    </p>
-    <div class="mission-btns">
-      <a href="/search" class="btn-gold">🔍 Explore All Mosques</a>
-      <a href="/add" class="btn-outline">+ Add a Mosque</a>
-    </div>
-    <p class="mission-disclaimer">
-      ⚠️ Disclaimer: We are a community directory. We are not responsible for the availability or quality of food at any location. Food availability may change daily — please verify before travelling.
-    </p>
+<div class="dvd"></div>
+
+<div class="sec">
+  <div class="stag">Why UAE Iftar Finder</div>
+  <h2 class="stitle">Your Trusted Ramadan Guide</h2>
+  <div class="wgrid">
+    <div class="wcard"><div class="wi">🕐</div><h3>Live Prayer Times</h3><p>Real-time daily prayer times for every UAE emirate. Know exactly when Maghrib is today.</p></div>
+    <div class="wcard"><div class="wi">📍</div><h3>Find Nearest Mosque</h3><p>Use your GPS to instantly find the closest mosque offering Iftar to your location.</p></div>
+    <div class="wcard"><div class="wi">🍽️</div><h3>Filter by Food</h3><p>Looking for Biryani or Mandi? Filter by food type and find exactly what's being served.</p></div>
+    <div class="wcard"><div class="wi">📲</div><h3>WhatsApp Share</h3><p>Share any Iftar spot with friends and family instantly on WhatsApp with one tap.</p></div>
+    <div class="wcard"><div class="wi">👥</div><h3>Community Powered</h3><p>Built and updated by locals. Real notes verified by the community for the community.</p></div>
+    <div class="wcard"><div class="wi">🔔</div><h3>Live Announcements</h3><p>Real-time alerts when organisations are distributing Iftar kits at public spots right now.</p></div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<div class="mband">
+  <div class="min">
+    <div class="stag">Our Mission</div>
+    <h2 class="stitle">No One Goes Hungry<br>This Ramadan</h2>
+    <p class="mt">The UAE is home to over <strong>3 million Muslims</strong> from every corner of the world — labourers, professionals, families and students — all observing Ramadan far from home.</p>
+    <p class="mt">Our mission is simple: <strong>connect people with Iftar</strong>. Whether you just finished a long shift, or want to break your fast with the community — UAE Iftar Finder helps you find a meal and a home.</p>
+    <div class="mbtns">
+      <a href="/search" class="bw">🔍 Find Iftar Now</a>
+      <a href="/add" class="bow">+ Add a Mosque</a>
+    </div>
+    <p class="md">⚠️ Disclaimer: We are a community directory. Food availability may change daily — please verify before travelling.</p>
+  </div>
+</div>
+
 <footer>
-  <div class="footer-inner">
-    <div class="footer-left">
-      <div class="built-by">Built by Muhammad Farooque 🌙</div>
-      <div class="built-sub">UAE Iftar Finder · Ramadan Kareem</div>
+  <div class="fi">
+    <div class="fb">
+      <div class="fn">UAE Iftar Finder 🌙</div>
+      <div class="fs">Built by Muhammad Farooque · Ramadan Kareem</div>
     </div>
-    <div class="footer-links">
+    <div class="fl">
       <a href="/search">Browse Mosques</a>
       <a href="/add">Add Mosque</a>
       <a href="mailto:technogsmfarooq@gmail.com">📧 Contact</a>
-      <a href="https://wa.me/?text=Find%20free%20Iftar%20in%20UAE%3A%20uaeiftarfinder.com%20%F0%9F%95%8C" target="_blank">📲 Share</a>
+      <a href="https://wa.me/?text=Find+free+Iftar+in+UAE+during+Ramadan%3A+https%3A%2F%2Fdubai-iftar-finder-production.up.railway.app" target="_blank">📲 Share App</a>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 UAE Iftar Finder · Built with ❤️ for the UAE community</span>
-    <span class="footer-copy">Disclaimer: Verify food availability before travelling</span>
+  <div class="fbot">
+    <span class="fc">© 2026 UAE Iftar Finder · Built with ❤️ for the UAE community</span>
+    <span class="fc">Verify food availability before travelling</span>
   </div>
 </footer>
 
 <script>
-async function loadPrayerTimes(city = 'Dubai') {
-  const container = document.getElementById('prayer-content');
-  try {
-    const d = new Date();
-    const url = `https://api.aladhan.com/v1/timingsByCity/${String(d.getDate()).padStart(2,'0')}-${String(d.getMonth()+1).padStart(2,'0')}-${d.getFullYear()}?city=${encodeURIComponent(city)}&country=UAE&method=8`;
-    const res = await fetch(url);
-    const data = await res.json();
-    if(data.code !== 200) throw new Error();
-    const t = data.data.timings;
-    const now = d.getHours()*60 + d.getMinutes();
-    const prayers = [{n:'Fajr',t:t.Fajr},{n:'Sunrise',t:t.Sunrise},{n:'Dhuhr',t:t.Dhuhr},{n:'Asr',t:t.Asr},{n:'Maghrib',t:t.Maghrib},{n:'Isha',t:t.Isha}];
-    const toM = s => { const [h,m] = s.split(':').map(Number); return h*60+m; };
-    let ai = 0;
-    prayers.forEach((p,i) => { if(now >= toM(p.t)) ai = i; });
-    const ni = (ai+1) % prayers.length;
-    const diff = toM(prayers[ni].t) - now;
-    const countdown = diff > 0 ? `${Math.floor(diff/60)}h ${diff%60}m` : 'Soon';
-    container.innerHTML = `
-      <div class="prayers-row">
-        ${prayers.map((p,i)=>`
-          <div class="p-item ${i===ai?'active':''}">
-            <div class="p-name">${p.n}</div>
-            <div class="p-time">${p.t}</div>
-          </div>`).join('')}
-      </div>
-      <div class="pw-next">
-        Next: <span>${prayers[ni].n}</span> at <span>${prayers[ni].t}</span>
-        &nbsp;·&nbsp; in <span>${countdown}</span>
-        &nbsp;·&nbsp; 🌙 Iftar (Maghrib): <span>${t.Maghrib}</span>
-      </div>`;
-  } catch(e) {
-    container.innerHTML = `<div class="pw-loading" style="color:#f87171">Could not load prayer times — check connection</div>`;
-  }
+async function loadPrayer(city='Dubai'){
+  const c=document.getElementById('pc');
+  try{
+    const d=new Date();
+    const url=`https://api.aladhan.com/v1/timingsByCity/${String(d.getDate()).padStart(2,'0')}-${String(d.getMonth()+1).padStart(2,'0')}-${d.getFullYear()}?city=${encodeURIComponent(city)}&country=UAE&method=8`;
+    const res=await fetch(url);const data=await res.json();
+    if(data.code!==200)throw new Error();
+    const t=data.data.timings;
+    const now=d.getHours()*60+d.getMinutes();
+    const ps=[{n:'Fajr',t:t.Fajr},{n:'Sunrise',t:t.Sunrise},{n:'Dhuhr',t:t.Dhuhr},{n:'Asr',t:t.Asr},{n:'Maghrib',t:t.Maghrib},{n:'Isha',t:t.Isha}];
+    const tm=s=>{const[h,m]=s.split(':').map(Number);return h*60+m;};
+    let ai=0;ps.forEach((p,i)=>{if(now>=tm(p.t))ai=i;});
+    const ni=(ai+1)%ps.length;
+    const df=tm(ps[ni].t)-now;
+    const cd=df>0?`${Math.floor(df/60)}h ${df%60}m`:'Soon';
+    c.innerHTML=`<div class="pr">${ps.map((p,i)=>`<div class="pi ${i===ai?'active':''}"><div class="pn">${p.n}</div><div class="pt">${p.t}</div></div>`).join('')}</div><div class="pnx">Next: <span>${ps[ni].n}</span> at <span>${ps[ni].t}</span> · in <span>${cd}</span> · 🌙 Iftar (Maghrib): <span>${t.Maghrib}</span></div>`;
+  }catch(e){c.innerHTML=`<div class="pload" style="color:#dc2626">Could not load prayer times</div>`;}
 }
-
-const citySelect = document.querySelector('.s-select');
-loadPrayerTimes(citySelect?.value || 'Dubai');
-citySelect?.addEventListener('change', () => {
-  const city = citySelect.value || 'Dubai';
-  document.getElementById('pw-city-label').textContent = `📍 ${city}, UAE`;
-  loadPrayerTimes(city);
+const cs=document.getElementById('cs');
+loadPrayer(cs?.value||'Dubai');
+cs?.addEventListener('change',()=>{
+  document.getElementById('pwc').textContent=`📍 ${cs.value||'Dubai'}, UAE`;
+  loadPrayer(cs.value||'Dubai');
 });
+function findNearMe(){
+  if(!navigator.geolocation){alert('Location not supported');return;}
+  const b=document.querySelector('.nm');
+  b.textContent='📍 Finding location...';b.disabled=true;
+  navigator.geolocation.getCurrentPosition(
+    p=>{window.location.href=`/search?lat=${p.coords.latitude}&lng=${p.coords.longitude}&near=1`;},
+    ()=>{b.textContent='📍 Find Nearest Mosque';b.disabled=false;alert('Please allow location access.');}
+  );
+}
 </script>
 </body>
 </html>
