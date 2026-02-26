@@ -453,14 +453,17 @@ def init_db():
 
 @app.route('/')
 def index():
-    conn = get_db()
-    cities = conn.execute(
-        "SELECT city, COUNT(*) as cnt FROM mosques GROUP BY city ORDER BY city"
-    ).fetchall()
-    total = conn.execute("SELECT COUNT(*) FROM mosques").fetchone()[0]
-    food_types = _get_food_types(conn)
-    conn.close()
-    return render_template('index.html', cities=cities, total=total, food_types=food_types)
+    try:
+        conn = get_db()
+        cities = conn.execute(
+            "SELECT city, COUNT(*) as cnt FROM mosques GROUP BY city ORDER BY city"
+        ).fetchall()
+        total = conn.execute("SELECT COUNT(*) FROM mosques").fetchone()[0]
+        food_types = _get_food_types(conn)
+        conn.close()
+        return render_template('index.html', cities=cities, total=total, food_types=food_types)
+    except Exception as e:
+        return f"<h1>Error: {str(e)}</h1>", 500
 
 @app.route('/search')
 def search():
